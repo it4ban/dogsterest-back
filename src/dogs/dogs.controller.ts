@@ -1,15 +1,10 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Body, Param, Put } from '@nestjs/common';
 import { DogsService } from './dogs.service';
-import { CreateDogDto } from './dto/create-dog.dto';
+import { UpdateDogDto } from './dto/update-dog.dto';
 
 @Controller('dogs')
 export class DogsController {
   constructor(private readonly dogsService: DogsService) {}
-
-  @Post()
-  create(@Body() createDogDto: CreateDogDto) {
-    return this.dogsService.create(createDogDto);
-  }
 
   @Get()
   findAll() {
@@ -21,8 +16,8 @@ export class DogsController {
     return this.dogsService.findOne(+id);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.dogsService.remove(+id);
+  @Put(':id')
+  update(@Param('id') id: string, @Body() updateDogDto: UpdateDogDto) {
+    return this.dogsService.updateOne(+id, updateDogDto);
   }
 }

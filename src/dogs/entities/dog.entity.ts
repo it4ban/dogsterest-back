@@ -9,21 +9,17 @@ export class Dog {
     type: 'integer',
     default: 0,
   })
-  likeCounter: number;
+  likeCount: number;
 
   @Column({ default: false })
   onFavourite: boolean;
 
-  @Column('text')
+  @Column({ type: 'text' })
   image: string;
 
   @Column()
   name: string;
 
-  @Column('text')
+  @Column({ type: 'text' })
   description: string;
-
-  constructor(dog: Partial<Dog>) {
-    Object.assign(this, dog);
-  }
 }
