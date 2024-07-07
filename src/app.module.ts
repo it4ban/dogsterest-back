@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DogsModule } from './dogs/dogs.module';
+import { FavouritesModule } from './favourites/favourites.module';
 
 import * as dotenv from 'dotenv';
+
+console.log(process.env.POSTGRES_PASS);
 
 dotenv.config();
 
@@ -16,9 +19,10 @@ dotenv.config();
       password: process.env.POSTGRES_PASS,
       database: process.env.POSTGRES_DB,
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: Boolean(process.env.POSTGRES_SYNCHRONIZE),
     }),
     DogsModule,
+    FavouritesModule,
   ],
   controllers: [],
   providers: [],
